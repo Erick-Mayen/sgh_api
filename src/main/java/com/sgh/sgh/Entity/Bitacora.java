@@ -24,4 +24,8 @@ public class Bitacora {
 	public int usuario_id;
 	public String ip;
 	public Date fecha;
+	public void setIp(String ipAddress) {
+		// TODO Auto-generated method stub
+		
+	}
 }
