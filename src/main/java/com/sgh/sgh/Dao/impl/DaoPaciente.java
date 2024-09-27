@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.sgh.sgh.Dao.IDaoPaciente;
 import com.sgh.sgh.Entity.Paciente;
+import com.sgh.sgh.Entity.PersonalMedico;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -33,5 +35,17 @@ public class DaoPaciente implements IDaoPaciente {
         em.persist(paciente);  // Insertar un nuevo registro
         return paciente;
     }
+    
+    @Override
+    @Transactional
+    public Paciente actualizarRegistro(Paciente paciente) {
+        return em.merge(paciente);
+    }
+
+	@Override
+	public void eliminarRegistro(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

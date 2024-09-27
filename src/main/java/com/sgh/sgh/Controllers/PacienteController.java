@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.sgh.sgh.Dao.IDaoPaciente;
 import com.sgh.sgh.Entity.Paciente;
+import com.sgh.sgh.Entity.PersonalMedico;
 
 @RestController
 @RequestMapping(value = ("/sgh"))
@@ -36,7 +37,7 @@ public class PacienteController {
     }
 
     // Agregar nuevo paciente
-    @PostMapping(value = "/paciente/agregar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/paciente", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Paciente> agregarPaciente(@RequestBody Paciente paciente) {
         try {
             Paciente nuevoPaciente = daoPaciente.agregarRegistro(paciente);
@@ -46,4 +47,18 @@ public class PacienteController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @PutMapping("/paciente/{id}")
+    public ResponseEntity<Paciente> updatePaciente(@PathVariable int id, @RequestBody Paciente paciente) {
+        Paciente existente = daoPaciente.findById(id);
+        if (existente == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        // Asegurar que el ID del objeto enviado coincide con el ID de la ruta
+        paciente.setId(id);
+        Paciente actualizado = daoPaciente.actualizarRegistro(paciente);
+        return new ResponseEntity<>(actualizado, HttpStatus.OK);
+    }
+    
+    
 }
