@@ -33,12 +33,6 @@ public class PersonalMedico {
     @Column(name = "genero", length = 45, nullable = true)
     private String genero;
 
-    @Column(name = "especialidad", nullable = true)
-    private Integer especialidad;
-
-    @Column(name = "departamento", length = 45, nullable = true)
-    private String departamento;
-
     @Column(name = "telefono", length = 45, nullable = true)
     private String telefono;
 
