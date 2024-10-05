@@ -11,6 +11,7 @@ import com.sgh.sgh.Dao.IDaoPersonalMedico;
 import com.sgh.sgh.Entity.PersonalMedico;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/sgh")
 public class PersonalMedicoController {
 

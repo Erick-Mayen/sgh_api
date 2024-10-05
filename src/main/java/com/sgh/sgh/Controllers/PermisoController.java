@@ -15,19 +15,15 @@ import com.sgh.sgh.Entity.Permiso;
 
 @RestController
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = ("/sgh"))
 public class PermisoController {
 	
 	@Autowired
 	public IDaoPermiso daoPermiso;
 	
-	@GetMapping(value = "/perimso", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/permiso", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Permiso> getPermiso(){
 		return daoPermiso.findAll();
 	}
-	
-	
-	
-
 }

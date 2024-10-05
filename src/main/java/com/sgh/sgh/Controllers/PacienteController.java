@@ -13,6 +13,7 @@ import com.sgh.sgh.Entity.Paciente;
 import com.sgh.sgh.Entity.PersonalMedico;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = ("/sgh"))
 public class PacienteController {
 

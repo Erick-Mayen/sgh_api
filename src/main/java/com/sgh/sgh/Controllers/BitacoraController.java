@@ -21,8 +21,7 @@ import com.sgh.sgh.Dao.IDaoBitacora;
 import com.sgh.sgh.Entity.Bitacora;
 
 @RestController
-
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = ("/sgh"))
 public class BitacoraController {
 	@Autowired
@@ -32,18 +31,20 @@ public class BitacoraController {
 	public List<Bitacora> getBitacora(){
 		return daoBitacora.findAll();
 	}
-	
 
 	@GetMapping(value ="/bitacora/buscarPorParametro", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Bitacora>> buscarBitacora(
             @RequestParam(required = false) String accion,
-            @RequestParam(required = false) Integer modulo,
-            @RequestParam(required = false) Integer usuario,
+            @RequestParam(required = false) Integer modulo_id,
+            @RequestParam(required = false) Integer usuario_id,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaIni,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
 
         try {
-            List<Bitacora> resultados = daoBitacora.SelectBitacora(accion, modulo, usuario, fechaIni, fechaFin);
+        	Integer moduloFinal = (modulo_id != null) ? modulo_id : 0;
+
+            Integer usuarioFinal = (usuario_id != null) ? usuario_id : 0;
+            List<Bitacora> resultados = daoBitacora.SelectBitacora(accion, moduloFinal, usuarioFinal, fechaIni, fechaFin);
             if (resultados.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -54,7 +55,7 @@ public class BitacoraController {
         }
     }
 	
-	@PostMapping(value = "/bitacora/agregar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/bitacora", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Bitacora> agregarRegistro(@RequestBody Bitacora bitacora) {
         try {
             Bitacora nuevoRegistro = daoBitacora.agregarRegistro(bitacora);

@@ -1,5 +1,7 @@
 package com.sgh.sgh.Dao.impl;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
 
@@ -68,17 +70,6 @@ public class DaoBitacora implements IDaoBitacora{
 			return null;
 		}
 	}
-
-/*	@Override
-	public Bitacora agregarRegistro(Bitacora bitacora) {
-		try {
-			em.persist(bitacora);
-			return bitacora;
-		}catch(Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}*/
 	
 	@Override
 	public Bitacora agregarRegistro(Bitacora bitacora) {
@@ -101,8 +92,14 @@ public class DaoBitacora implements IDaoBitacora{
 	private String getClientIp() {
 	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 	    String ipAddress = request.getHeader("X-Forwarded-For");
-	    if (ipAddress == null || ipAddress.isEmpty()) {
-	        ipAddress = request.getRemoteAddr();
+	    if (ipAddress == null || ipAddress.isEmpty() || "127.0.0.1".equals(ipAddress) || "0:0:0:0:0:0:0:1".equals(ipAddress)) {
+	        // Si la IP es localhost, obten la IP real de la máquina
+	        try {
+	            InetAddress inetAddress = InetAddress.getLocalHost();
+	            ipAddress = inetAddress.getHostAddress();
+	        } catch (UnknownHostException e) {
+	            e.printStackTrace();
+	        }
 	    }
 	    return ipAddress;
 	}

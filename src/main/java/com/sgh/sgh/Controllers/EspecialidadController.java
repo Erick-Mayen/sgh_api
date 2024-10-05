@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,17 +15,18 @@ import com.sgh.sgh.Dao.impl.DaoEspecialidad;
 import com.sgh.sgh.Entity.Especialidad;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/sgh")
 public class EspecialidadController {
 	@Autowired
 	public DaoEspecialidad especialidadDao;
 	
-	@GetMapping(value = "/especialidad/listar", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/especialidad", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Especialidad> listarEspecialidad(){
 		return especialidadDao.listar();
 	}
 	
-	@PostMapping(value = "/especialidad/agregar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/especialidad", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Especialidad crearEspecialidad(@RequestBody Especialidad espcldad) {
 		return especialidadDao.crearEspecialidad(espcldad);
 	}

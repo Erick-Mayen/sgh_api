@@ -9,6 +9,7 @@ import com.sgh.sgh.Dao.IDaoModulo;
 import com.sgh.sgh.Entity.Modulo;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/sgh")
 public class ModuloController {
 
