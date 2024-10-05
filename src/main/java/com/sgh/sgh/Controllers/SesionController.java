@@ -7,6 +7,7 @@ import com.sgh.sgh.Dao.IDaoSesion;
 import com.sgh.sgh.Entity.Sesion;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/sgh")
 public class SesionController {
     @Autowired

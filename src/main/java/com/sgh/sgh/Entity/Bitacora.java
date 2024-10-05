@@ -20,12 +20,10 @@ public class Bitacora {
 	public int id;
 	public String accion;
 	public String descripcion;
-	public int modulo_id;
-	public int usuario_id;
+	@Column(name = "modulo_id")
+	public Integer modulo;
+	@Column(name = "usuario_id")
+	public Integer usuario;
 	public String ip;
 	public Date fecha;
-	public void setIp(String ipAddress) {
-		// TODO Auto-generated method stub
-		
-	}
 }

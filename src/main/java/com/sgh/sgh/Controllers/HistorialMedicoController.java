@@ -3,6 +3,7 @@ package com.sgh.sgh.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.sgh.sgh.Dao.IDaoHistorialMedico;
 import com.sgh.sgh.Entity.HistorialMedico;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/sgh")
 public class HistorialMedicoController {
 	@Autowired
@@ -24,7 +26,7 @@ public class HistorialMedicoController {
     public List<HistorialMedico> listar() {
         return historialMedicoDao.listAll();
     }
-
+ 
     @GetMapping("/historial_medico/{id}")
     public HistorialMedico obtenerPorId(@PathVariable int id) {
         return historialMedicoDao.findById(id);
