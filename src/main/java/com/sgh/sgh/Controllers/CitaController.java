@@ -23,7 +23,7 @@ import com.sgh.sgh.Entity.Cita;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = ("/sgh"))
-public class CitaControler {
+public class CitaController {
 
 	 	@Autowired
 	    private IDaoCita daoCitas;
