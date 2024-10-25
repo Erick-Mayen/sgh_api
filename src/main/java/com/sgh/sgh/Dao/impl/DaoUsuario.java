@@ -21,7 +21,7 @@ public class DaoUsuario implements IDaoUsuario {
 	@Override
 	@Transactional
 	public List<Usuario> listar() {
-		TypedQuery<Usuario> query = em.createQuery("from Usuario", Usuario.class);
+		TypedQuery<Usuario> query = em.createQuery("from Usuario WHERE activo = 1", Usuario.class);
 
 		try {
 			return query.getResultList();
@@ -29,6 +29,22 @@ public class DaoUsuario implements IDaoUsuario {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	@Override
+	@Transactional
+	public Usuario obtenerPorId(Integer id) {
+		TypedQuery<Usuario> query = em.createQuery("from Usuario where id = :id", Usuario.class);
+		query.setParameter("id", id);
+
+		try {
+			List<Usuario> resultados = query.getResultList();
+		    return resultados.isEmpty() ? null : resultados.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	@Override

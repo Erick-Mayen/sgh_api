@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import com.sgh.sgh.Entity.Usuario;
 
 @RestController
 @RequestMapping("/sgh")
+@CrossOrigin("*")
 public class UsuarioController {
 
 	@Autowired
@@ -26,6 +29,11 @@ public class UsuarioController {
 	@GetMapping("/usuario")
 	public List<Usuario> listar() {
 		return usuarioDao.listar();
+	}
+	
+	@GetMapping("/usuario/{id}")
+	public Usuario obtenerPorId(@PathVariable int id) {
+		return usuarioDao.obtenerPorId(id);
 	}
 
 	@GetMapping("/usuario/obtener")
