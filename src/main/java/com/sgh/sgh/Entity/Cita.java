@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -24,7 +26,21 @@ public class Cita {
     public Integer paciente_id;
     public Integer personal_medico_id;
     public Integer usuario_creacion;
-    public Date fecha_creacion;
-    public Integer usuario_modificacion; 
-    public Date fecha_modificacion; 
+    @Column(name = "usuario_modificacion", nullable = true)
+    private Integer usuario_modificacion;  
+    @Column(name = "fecha_creacion", updatable = false, nullable = false)
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+    @Column(name = "fecha_modificacion", nullable = false)
+    private LocalDateTime fechaModificacion = LocalDateTime.now();
+
+    @PrePersist
+    protected void onCreate() {
+    	fechaCreacion = LocalDateTime.now();
+    	fechaModificacion = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+    	fechaModificacion = LocalDateTime.now();
+    }
 }
