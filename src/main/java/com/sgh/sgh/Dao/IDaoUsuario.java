@@ -6,6 +6,7 @@ import com.sgh.sgh.Entity.Usuario;
 
 public interface IDaoUsuario {
     List<Usuario> listar();
+    Usuario obtenerPorId(Integer id);
     Usuario obtenerPorCorreo(String correo);
     Usuario crear(Usuario usuario);
     Usuario actualizar(Usuario usuario);
